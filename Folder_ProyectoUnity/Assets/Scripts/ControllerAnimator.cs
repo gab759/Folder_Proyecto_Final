@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class ControllerAnimator : MonoBehaviour
 {
     private Animator animator;
-
+    public float jumpForce = 5f;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -15,7 +15,7 @@ public class ControllerAnimator : MonoBehaviour
     {
         if (context.performed) 
         {
-            animator.SetTrigger("Jumpining");
+            animator.SetTrigger("Jumping");
         }
     }
 

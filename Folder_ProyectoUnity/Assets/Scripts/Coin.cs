@@ -10,4 +10,15 @@ public class Coin : MonoBehaviour
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("Delete"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
