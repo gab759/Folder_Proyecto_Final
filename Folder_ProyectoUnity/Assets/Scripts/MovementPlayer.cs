@@ -41,7 +41,6 @@ public class MovementPlayer : MonoBehaviour
 
     private void UpdateTargetPosition()
     {
-        // Calcula la posición en el eje X basado en el carril actual
         float xPosition = (currentLane - 1) * laneDistance;
         targetPosition = new Vector3(xPosition, transform.position.y, transform.position.z);
     }
