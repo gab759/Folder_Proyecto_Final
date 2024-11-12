@@ -24,9 +24,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Movement",
+                    "name": "OnMoveLeft",
                     "type": "Button",
-                    "id": "57be1d14-956a-47af-ba48-d3052033b232",
+                    "id": "b64758bc-36d0-449a-b581-ac748dee5a15",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OnMoveRight",
+                    "type": "Button",
+                    "id": "2d8b7a1d-13b5-4049-a47b-29d8619933da",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -57,37 +66,26 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "32851ed5-3b82-4713-a6d0-0349c82aafaf",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "1d1adc8a-3087-45a3-bd93-01df2158aaf1",
+                    "name": "",
+                    "id": "733ee393-6312-4581-b5f3-b7eb72821dcb",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Movement",
+                    "groups": "",
+                    "action": "OnMoveLeft",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
-                    "name": "positive",
-                    "id": "53b76247-8b25-458d-9fe4-754a89deea94",
+                    "name": "",
+                    "id": "da86e6df-74ad-4cd0-a041-3840e844aa30",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Movement",
+                    "groups": "",
+                    "action": "OnMoveRight",
                     "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 }
             ]
         }
