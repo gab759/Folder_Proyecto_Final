@@ -7,7 +7,6 @@ public class GeneratorCoin : MonoBehaviour
     public CoinPattern[] coinPattern;
     public Transform[] spawnPoints;
     public float spawnInterval = 10f;
-    public float spawnDistance = 5f;
 
     private float lastSpawnZ;
 
@@ -34,7 +33,5 @@ public class GeneratorCoin : MonoBehaviour
 
             Instantiate(selectedPattern.coinPrefab, spawnPosition, Quaternion.identity);
         }
-
-        lastSpawnZ += spawnDistance;
     }
 }

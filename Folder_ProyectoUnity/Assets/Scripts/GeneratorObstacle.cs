@@ -23,10 +23,8 @@ public class GeneratorObstacle : MonoBehaviour
         GameObject selectedPrefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
         Transform selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        Vector3 spawnPosition = new Vector3(selectedSpawnPoint.position.x, selectedSpawnPoint.position.y, lastSpawnZ + spawnDistance);
+        Vector3 spawnPosition = new Vector3(selectedSpawnPoint.position.x, selectedSpawnPoint.position.y, lastSpawnZ);
 
         Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
-
-        lastSpawnZ = spawnPosition.z;
     }
 }
