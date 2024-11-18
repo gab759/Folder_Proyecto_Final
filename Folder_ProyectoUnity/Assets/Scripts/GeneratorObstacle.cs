@@ -7,7 +7,6 @@ public class GeneratorObstacle : MonoBehaviour
     public GameObject[] obstaclePrefabs;
     public Transform[] spawnPoints;
     public float spawnInterval = 2f;
-    public float spawnDistance = 5f;
 
     private float lastSpawnZ;
 

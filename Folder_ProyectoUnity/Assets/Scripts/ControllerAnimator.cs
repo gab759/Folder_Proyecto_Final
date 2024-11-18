@@ -6,16 +6,25 @@ using UnityEngine.InputSystem;
 public class ControllerAnimator : MonoBehaviour
 {
     private Animator animator;
-    public float jumpForce = 5f;
-    void Start()
+    [SerializeField] float jumpForce = 8f;
+    public bool puedoSaltar;
+    [SerializeField] Rigidbody rb;
+    void Awake()
     {
+        puedoSaltar = false;
         animator = GetComponent<Animator>();
     }
-    public void OnJump(InputAction.CallbackContext context)
+    public void OnJump1(InputAction.CallbackContext context)
     {
-        if (context.performed) 
+        if (puedoSaltar && context.performed)
         {
-            animator.SetTrigger("Jumping");
+            animator.SetBool("salte", true);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Salta hacia arriba
+            puedoSaltar = false; // Deshabilitar el salto hasta que toque el suelo de nuevo
+        }
+        else if (!puedoSaltar && context.performed)
+        {
+            EstoyCayendo(); // Si intenta saltar mientras está en el aire
         }
     }
 
@@ -29,5 +38,10 @@ public class ControllerAnimator : MonoBehaviour
         {
             animator.SetBool("BoolSlide", false);
         }
+    }
+    public void EstoyCayendo()
+    {
+        animator.SetBool("tocoSuelo", true);
+        animator.SetBool("salte", false);
     }
 }

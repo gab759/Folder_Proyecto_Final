@@ -10,7 +10,6 @@ public class MovementPlayer : MonoBehaviour
 
     private int currentLane = 1;
     private Vector3 targetPosition;
-
     private void Start()
     {
         UpdateTargetPosition();
@@ -20,7 +19,6 @@ public class MovementPlayer : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
-
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
         if (context.performed && currentLane > 0)
