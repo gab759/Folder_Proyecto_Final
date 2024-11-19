@@ -11,47 +11,47 @@ public class ControllerAnimator : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Rigidbody rb;
 
-    private bool puedoSaltar;
+    public bool isGrounded;
+    public bool puedoSaltar=true;
+    public bool canSlide=true;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
-        puedoSaltar = false;
+        puedoSaltar = true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         DetectarSuelo();
     }
+    
 
     public void OnJump1(InputAction.CallbackContext context)
     {
-        if (puedoSaltar && context.performed)
+        if (puedoSaltar && context.performed && isGrounded)
         {
             animator.SetBool("salte", true);
             animator.SetBool("tocoSuelo", false);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             Debug.Log("sALTE?");
-            puedoSaltar = false;
+            
         }
     }
 
     public void OnSlide(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && isGrounded && canSlide)
         {
+            canSlide = true;
             animator.SetBool("BoolSlide", true);
-        }
-        else if (context.canceled)
-        {
-            animator.SetBool("BoolSlide", false);
         }
     }
 
     private void DetectarSuelo()
     {
-        Vector3 rayOrigin = transform.position + Vector3.down * 0.1f;
-        bool isGrounded = Physics.Raycast(rayOrigin, Vector3.down, groundCheckDistance, groundLayer);
+        Vector3 rayOrigin = transform.position + Vector3.down * 0.001f;
+        isGrounded = Physics.Raycast(rayOrigin, Vector3.down, groundCheckDistance, groundLayer);
 
         Debug.DrawRay(rayOrigin, Vector3.down * groundCheckDistance, Color.red);
 
@@ -59,12 +59,16 @@ public class ControllerAnimator : MonoBehaviour
 
         if (isGrounded)
         {
-            puedoSaltar = true;
+            canSlide = true;
             animator.SetBool("salte", false);
+            puedoSaltar = true;
         }
-        else
+        else if(!isGrounded)
         {
+            canSlide = false;
+            puedoSaltar = false;
             animator.SetBool("tocoSuelo", false);
+            
         }
     }
 }
