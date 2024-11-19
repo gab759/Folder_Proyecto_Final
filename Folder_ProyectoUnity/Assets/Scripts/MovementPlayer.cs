@@ -9,16 +9,24 @@ public class MovementPlayer : MonoBehaviour
     public float moveSpeed = 5.0f;
 
     private int currentLane = 1;
-    private Vector3 targetPosition;
-    private void Start()
+    private float targetX;
+
+    void Start()
     {
         UpdateTargetPosition();
     }
 
-    private void Update()
+    void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        Vector3 newPosition = new Vector3(
+            Mathf.MoveTowards(transform.position.x, targetX, moveSpeed * Time.deltaTime),
+            transform.position.y,
+            transform.position.z
+        );
+
+        transform.position = newPosition;
     }
+
     public void OnMoveLeft(InputAction.CallbackContext context)
     {
         if (context.performed && currentLane > 0)
@@ -39,7 +47,6 @@ public class MovementPlayer : MonoBehaviour
 
     private void UpdateTargetPosition()
     {
-        float xPosition = (currentLane - 1) * laneDistance;
-        targetPosition = new Vector3(xPosition, transform.position.y, transform.position.z);
+        targetX = (currentLane - 1) * laneDistance;
     }
 }
