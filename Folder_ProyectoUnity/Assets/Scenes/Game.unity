@@ -760,10 +760,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePrefabs:
-  - {fileID: 8893974882939940396, guid: b1aeabc9a60fde044a39af14f029a195, type: 3}
   - {fileID: 4487587764083699182, guid: a42de0945aefb274e8ed1ad62c326090, type: 3}
   - {fileID: 231572424719093174, guid: 49cac4407d03e524ab5d0d02bcdff575, type: 3}
   - {fileID: 7307111617199103188, guid: 6c667fbdadc5a534a842dcc35f51ffd0, type: 3}
+  - {fileID: 639733473276015790, guid: fc124f69b7f1f5342a2f5ab556fb15e6, type: 3}
+  - {fileID: 2404824698238612261, guid: 5eb6c144d9dd5ca4d81d9baa6cbf5797, type: 3}
+  - {fileID: 5108345381217709165, guid: b7364619978a1a842aec150fbbb08104, type: 3}
   spawnPoints:
   - {fileID: 597446964}
   - {fileID: 1996368614}
