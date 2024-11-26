@@ -9,7 +9,9 @@ public class Coin : MonoBehaviour
 
     void Start()
     {
-        transform.DOLocalRotate(new Vector3(0, 360, 0), 1f, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
+        transform.localRotation = Quaternion.Euler(90, 0, 0);
+
+        transform.DOLocalRotate(new Vector3(90, 360, 0), 1f, RotateMode.FastBeyond360).SetLoops(-1, LoopType.Restart).SetEase(Ease.Linear);
     }
 
     void Update()
@@ -21,6 +23,7 @@ public class Coin : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.Instance.GainCoin();
             Destroy(gameObject);
         }
         else if (other.CompareTag("Delete"))

@@ -1,12 +1,50 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    public void LoadScene()
+    public static GameManager Instance { get; private set; }
+
+    [Header("Eventos: ")]
+    [SerializeField] private int playerLife;
+    [SerializeField] private int playerCoins;
+    public event Action<int> OnLifeUpdate;
+    public event Action<int> OnCoinUpdate;
+    public event Action OnLose;
+
+    private void Awake()
     {
-        SceneManager.LoadScene("Game");
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+
+        Instance = this;
+    }
+    private void Start()
+    {
+        playerCoins = 0;
+    }
+    public void GainCoin()
+    {
+        playerCoins++;
+
+        OnCoinUpdate?.Invoke(playerCoins);
+    }
+    public void ModifyLife(int modify)
+    {
+        playerLife = Math.Clamp(playerLife + modify, 0, 3);
+
+        OnLifeUpdate?.Invoke(playerLife);
+
+        ValidaeLife();
+    }
+    private void ValidaeLife()
+    {
+        if (playerLife <= 0)
+        {
+            OnLose?.Invoke();
+        }
     }
 }
