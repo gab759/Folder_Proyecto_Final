@@ -27,7 +27,7 @@ public class ControllerAnimator : MonoBehaviour
     }
     
 
-    public void OnJump1(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (puedoSaltar && context.performed && isGrounded)
         {
@@ -41,11 +41,21 @@ public class ControllerAnimator : MonoBehaviour
 
     public void OnSlide(InputAction.CallbackContext context)
     {
-        if (context.performed && isGrounded && canSlide)
+        if (context.performed && isGrounded && canSlide && !animator.GetBool("BoolSlide"))
         {
-            canSlide = true;
             animator.SetBool("BoolSlide", true);
+
+            StartCoroutine(ResetSlide());
         }
+        else if (!isGrounded)
+        {
+            animator.SetBool("BoolSlide", false);
+        }
+    }
+    private IEnumerator ResetSlide()
+    {
+        yield return new WaitForSeconds(1.0f);
+        animator.SetBool("BoolSlide", false);
     }
 
     private void DetectarSuelo()
