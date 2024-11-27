@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [Header("Eventos: ")]
+    [Header("Atributos del Player: ")]
     [SerializeField] private int playerLife;
     [SerializeField] private int playerCoins;
     public event Action<int> OnLifeUpdate;
