@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text coinsText;
+    public GameObject panelGameOver;
     private float score = 0;
     private float scoreIncreaseRate = 15f;
 

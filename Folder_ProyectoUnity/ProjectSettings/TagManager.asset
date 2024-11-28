@@ -10,6 +10,8 @@ TagManager:
   - Iman
   - DoublePoint
   - DoublePoints
+  - Obstacle
+  - Loss
   layers:
   - Default
   - TransparentFX

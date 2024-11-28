@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class MovementPlayer : MonoBehaviour
 {
-    public float laneDistance = 1.0f;
+    public float laneDistance = 2.1f;
     public float moveSpeed = 5.0f;
 
     private int currentLane = 1;

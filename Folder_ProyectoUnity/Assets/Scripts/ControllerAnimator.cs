@@ -10,11 +10,11 @@ public class ControllerAnimator : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Rigidbody rb;
-
-    public bool isGrounded;
-    public bool puedoSaltar=true;
-    public bool canSlide=true;
-
+    [SerializeField] private float obstacleForceZ = 1f;
+    [Header("Boleanos: ")]
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool puedoSaltar=true;
+    [SerializeField] private bool canSlide=true;
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -50,6 +50,23 @@ public class ControllerAnimator : MonoBehaviour
         else if (!isGrounded)
         {
             animator.SetBool("BoolSlide", false);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            rb.AddForce(new Vector3(0, 0, -obstacleForceZ), ForceMode.Impulse);
+            Debug.Log("Me empujaron?");
+        }
+        if (other.CompareTag("Obstacle") && !puedoSaltar)
+        {
+            rb.AddForce(new Vector3(0, 0, -2), ForceMode.Impulse);
+            Debug.Log("Me empujaron saltando?");
+        }
+        if (other.CompareTag("Loss"))   
+        {
+            Debug.Log("Perdiste");
         }
     }
     private IEnumerator ResetSlide()

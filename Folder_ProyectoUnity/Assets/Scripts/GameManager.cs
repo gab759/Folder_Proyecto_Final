@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     [Header("Atributos del Player: ")]
     [SerializeField] private int playerLife;
     [SerializeField] private int playerCoins;
-    public event Action<int> OnLifeUpdate;
     public event Action<int> OnCoinUpdate;
     public event Action OnLose;
 
@@ -32,19 +31,19 @@ public class GameManager : MonoBehaviour
 
         OnCoinUpdate?.Invoke(playerCoins);
     }
-    public void ModifyLife(int modify)
+    /*public void ModifyLife(int modify)
     {
         playerLife = Math.Clamp(playerLife + modify, 0, 3);
 
         OnLifeUpdate?.Invoke(playerLife);
 
         ValidaeLife();
-    }
+    } 
     private void ValidaeLife()
     {
         if (playerLife <= 0)
         {
             OnLose?.Invoke();
         }
-    }
+    }*/
 }

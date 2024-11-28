@@ -9,7 +9,7 @@ public abstract class PowerUpBase : MonoBehaviour
 
     public virtual void Activate()
     {
-        Debug.Log("Activando"  + PowerUpTag);
+        Debug.Log("Activando" + PowerUpTag);
     }
     private void Update()
     {
@@ -20,12 +20,16 @@ public abstract class PowerUpBase : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PowerUpController controller = other.GetComponent<PowerUpController>();
+            PowerUpController controller = other.GetComponent <PowerUpController>();
             if (controller != null)
             {
                 controller.CollectPowerUp(this);
                 Destroy(gameObject);
             }
+        }
+        if (other.CompareTag("Delete"))
+        {
+            Destroy(gameObject);
         }
     }
 }
