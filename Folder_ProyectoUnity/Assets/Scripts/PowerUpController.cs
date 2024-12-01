@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PowerUpController : MonoBehaviour
 {
-    private Stack<PowerUpBase> powerUpStack = new Stack<PowerUpBase>();
+    private MyQueue<PowerUpBase> powerUpQueue = new MyQueue<PowerUpBase>();
+    [SerializeField] private UiManager uiManager;
 
     void Update()
     {
@@ -16,21 +17,26 @@ public class PowerUpController : MonoBehaviour
 
     public void CollectPowerUp(PowerUpBase powerUp)
     {
-        powerUpStack.Push(powerUp);
+        powerUpQueue.Enqueue(powerUp);
         Debug.Log("Power-Up recogido: " + powerUp.PowerUpTag);
+
+        uiManager.AddPowerUpToUI(powerUp.powerUpData.icon);
     }
 
     public void UsePowerUp()
     {
-        if (powerUpStack.count > 0)
+        if (!powerUpQueue.IsEmpty())
         {
-            PowerUpBase activePowerUp = powerUpStack.Pop();
+            PowerUpBase activePowerUp = powerUpQueue.Dequeue();
             Debug.Log("Usando Power-Up: " + activePowerUp.PowerUpTag);
+
             activePowerUp.Activate();
+
+            uiManager.RemovePowerUpFromUI(activePowerUp.powerUpData.icon);
         }
         else
         {
-            Debug.Log("No hay más Power-Ups en la pila ");
+            Debug.LogWarning("No hay mas Power-Ups en la cola");
         }
     }
 }

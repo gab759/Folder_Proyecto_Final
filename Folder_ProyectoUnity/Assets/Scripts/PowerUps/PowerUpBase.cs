@@ -6,7 +6,7 @@ public abstract class PowerUpBase : MonoBehaviour
 {
     public abstract string PowerUpTag { get; }
     public float speed = 5f;
-
+    public PowerUpData powerUpData;
     public virtual void Activate()
     {
         Debug.Log("Activando" + PowerUpTag);

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b46624d509c3c04ea28eaf9843f8e46, type: 3}
   m_Name: MasterVolumeConfig
   m_EditorClassIdentifier: 
-  volume: 3
+  volume: 1.5

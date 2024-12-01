@@ -9,6 +9,6 @@ public class DoubleCoinPowerUp : PowerUpBase
     public override void Activate()
     {
         base.Activate();
-        Debug.LogError("Doble monedas activado");
+        //Debug.LogError("Doble monedas activado");
     }
 }

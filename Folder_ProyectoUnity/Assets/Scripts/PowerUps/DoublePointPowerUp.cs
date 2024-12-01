@@ -9,6 +9,6 @@ public class DoublePointPowerUp : PowerUpBase
     public override void Activate()
     {
         base.Activate();
-        Debug.LogError("Doble puntos activado");
+        //Debug.LogError("Doble puntos activado");
     }
 }

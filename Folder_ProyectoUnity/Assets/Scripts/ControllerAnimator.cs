@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class ControllerAnimator : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class ControllerAnimator : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool puedoSaltar=true;
     [SerializeField] private bool canSlide=true;
+
+    public static event Action<Transform> OnMagnetActive;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -67,6 +71,11 @@ public class ControllerAnimator : MonoBehaviour
         if (other.CompareTag("Loss"))   
         {
             Debug.Log("Perdiste");
+        }
+        if (other.CompareTag("Iman"))
+        {
+            OnMagnetActive?.Invoke(transform);
+            Debug.Log("Imán activado, atrayendo monedas.");
         }
     }
     private IEnumerator ResetSlide()
