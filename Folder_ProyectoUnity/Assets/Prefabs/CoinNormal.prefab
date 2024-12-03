@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  coinSound: {fileID: 8300000, guid: 33fa434076387d64aabf100247077382, type: 3}
 --- !u!65 &8356425274484312240
 BoxCollider:
   m_ObjectHideFlags: 0

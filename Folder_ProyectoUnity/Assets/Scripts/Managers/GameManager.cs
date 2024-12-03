@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("Atributos del Player: ")]
-    [SerializeField] private int playerLife;
+    //[SerializeField] private int playerLife;
     [SerializeField] private int playerCoins;
     [SerializeField] private Transform magnetPivot;
     public Transform MagnetPivot => magnetPivot;
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public event Action<bool> OnMagnetActivate;
     public event Action<int> OnCoinUpdate;
     public event Action OnLose;
+    public event Action<AudioClip> OnSFXPlay;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -46,7 +47,15 @@ public class GameManager : MonoBehaviour
 
         magnetCoroutine = StartCoroutine(DesactivateMagnet(duration));
     }
-
+    public void TriggerLose()
+    {
+        OnLose?.Invoke();
+        Debug.Log("Has perdido.");
+    }
+    public void PlaySFX(AudioClip clip)
+    {
+        OnSFXPlay?.Invoke(clip);
+    }
     private IEnumerator DesactivateMagnet(float duration)
     {
         yield return new WaitForSeconds(duration);

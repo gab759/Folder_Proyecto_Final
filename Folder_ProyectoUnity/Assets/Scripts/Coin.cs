@@ -8,6 +8,7 @@ public class Coin : MonoBehaviour
     public float speed = 5f;
     private bool isMagnetActive = false; 
     private Transform magnetPivot;
+    [SerializeField] private AudioClip coinSound;
 
     void Start()
     {
@@ -43,6 +44,8 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance.GainCoin();
+            GameManager.Instance.PlaySFX(coinSound);
+
             Destroy(gameObject);
         }
         else if (other.CompareTag("Delete"))

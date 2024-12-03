@@ -23,11 +23,13 @@ public class UiManager : MonoBehaviour
     private void OnEnable()
     {
         GameManager.Instance.OnCoinUpdate += OnCoinUpdate;
+        GameManager.Instance.OnLose += HandleLose;
     }
 
     private void OnDisable()
     {
         GameManager.Instance.OnCoinUpdate -= OnCoinUpdate;
+        GameManager.Instance.OnLose -= HandleLose;
     }
 
     private void Update()
@@ -58,7 +60,13 @@ public class UiManager : MonoBehaviour
         overflowQueue.Enqueue(powerUpIcon);
         Debug.Log("Power-Up agregado a la cola provicional");
     }
+    private void HandleLose()
+    {
+        Time.timeScale = 0;
+        panelGameOver.SetActive(true); 
 
+        Debug.Log("LOSS");
+    }
     public void RemovePowerUpFromUI(Sprite powerUpIcon)
     {
         for (int i = 0; i < powerUpSlots.Length; i++)

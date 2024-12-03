@@ -7,6 +7,9 @@ public class PowerUpController : MonoBehaviour
 {
     private MyQueue<PowerUpBase> powerUpQueue = new MyQueue<PowerUpBase>();
     [SerializeField] private UiManager uiManager;
+    [SerializeField] private AudioClip usePowerUp;
+    [SerializeField] private AudioClip collectPowerUp;
+
     public void PowerUpUse(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -18,7 +21,7 @@ public class PowerUpController : MonoBehaviour
     {
         powerUpQueue.Enqueue(powerUp);
         //Debug.Log("Power-Up recogido: " + powerUp.PowerUpTag);
-
+        GameManager.Instance.PlaySFX(collectPowerUp);
         uiManager.AddPowerUpToUI(powerUp.powerUpData.icon);
     }
 
@@ -28,7 +31,9 @@ public class PowerUpController : MonoBehaviour
         {
             PowerUpBase activePowerUp = powerUpQueue.Dequeue();
             //Debug.Log("Usando Power-Up: " + activePowerUp.PowerUpTag);
+            GameManager.Instance.PlaySFX(usePowerUp);
 
+            Debug.Log("SONIDOOOOOOOO?????");
             activePowerUp.ActivatePowerUp(GameManager.Instance);
 
             uiManager.RemovePowerUpFromUI(activePowerUp.powerUpData.icon);
