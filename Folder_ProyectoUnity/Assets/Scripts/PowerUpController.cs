@@ -1,24 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PowerUpController : MonoBehaviour
 {
     private MyQueue<PowerUpBase> powerUpQueue = new MyQueue<PowerUpBase>();
     [SerializeField] private UiManager uiManager;
-
-    void Update()
+    public void PowerUpUse(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (context.performed)
         {
             UsePowerUp();
         }
     }
-
     public void CollectPowerUp(PowerUpBase powerUp)
     {
         powerUpQueue.Enqueue(powerUp);
-        Debug.Log("Power-Up recogido: " + powerUp.PowerUpTag);
+        //Debug.Log("Power-Up recogido: " + powerUp.PowerUpTag);
 
         uiManager.AddPowerUpToUI(powerUp.powerUpData.icon);
     }
@@ -28,9 +27,9 @@ public class PowerUpController : MonoBehaviour
         if (!powerUpQueue.IsEmpty())
         {
             PowerUpBase activePowerUp = powerUpQueue.Dequeue();
-            Debug.Log("Usando Power-Up: " + activePowerUp.PowerUpTag);
+            //Debug.Log("Usando Power-Up: " + activePowerUp.PowerUpTag);
 
-            activePowerUp.Activate();
+            activePowerUp.ActivatePowerUp(GameManager.Instance);
 
             uiManager.RemovePowerUpFromUI(activePowerUp.powerUpData.icon);
         }

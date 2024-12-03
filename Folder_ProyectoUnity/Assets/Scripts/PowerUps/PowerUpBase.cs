@@ -4,12 +4,15 @@ using UnityEngine;
 
 public abstract class PowerUpBase : MonoBehaviour
 {
-    public abstract string PowerUpTag { get; }
     public float speed = 5f;
     public PowerUpData powerUpData;
+    public virtual void ActivatePowerUp(GameManager gameManager)
+    {
+        Activate();
+    }
     public virtual void Activate()
     {
-        Debug.Log("Activando" + PowerUpTag);
+        Debug.Log("Activando" + powerUpData);
     }
     private void Update()
     {

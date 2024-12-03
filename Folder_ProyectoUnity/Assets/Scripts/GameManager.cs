@@ -9,9 +9,12 @@ public class GameManager : MonoBehaviour
     [Header("Atributos del Player: ")]
     [SerializeField] private int playerLife;
     [SerializeField] private int playerCoins;
+    [SerializeField] private Transform magnetPivot;
+    public Transform MagnetPivot => magnetPivot;
+    private Coroutine magnetCoroutine;
+    public event Action<bool> OnMagnetActivate;
     public event Action<int> OnCoinUpdate;
     public event Action OnLose;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -30,6 +33,25 @@ public class GameManager : MonoBehaviour
         playerCoins++;
 
         OnCoinUpdate?.Invoke(playerCoins);
+    }
+    public void ActivateMagnet(float duration)
+    {
+        OnMagnetActivate?.Invoke(true);
+        Debug.Log("Imán activado.");
+
+        if (magnetCoroutine != null)
+        {
+            StopCoroutine(magnetCoroutine);
+        }
+
+        magnetCoroutine = StartCoroutine(DesactivateMagnet(duration));
+    }
+
+    private IEnumerator DesactivateMagnet(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        OnMagnetActivate?.Invoke(false);
+        Debug.Log("Imán desactivado.");
     }
     /*public void ModifyLife(int modify)
     {

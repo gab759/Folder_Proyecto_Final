@@ -38,7 +38,7 @@ public class Buttons : MonoBehaviour
     {
         if (rectTransform != null)
         {
-            rectTransform.DOScale(1.2f, 0.2f).SetEase(Ease.OutBack);
+            rectTransform.DOScale(1.2f, 0.2f).SetEase(Ease.OutBack).SetUpdate(true);
         }
 
     }
@@ -47,7 +47,7 @@ public class Buttons : MonoBehaviour
     {
         if (rectTransform != null)
         {
-            rectTransform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+            rectTransform.DOScale(1f, 0.2f).SetEase(Ease.OutBack).SetUpdate(true);
         }
     }
 
@@ -55,7 +55,7 @@ public class Buttons : MonoBehaviour
     {
         if (rectTransform != null)
         {
-            rectTransform.DOPunchScale(Vector3.one * 0.1f, 0.3f, 10, 1);
+            rectTransform.DOPunchScale(Vector3.one * 0.1f, 0.3f, 10, 1).SetUpdate(true);
         }
     }
 }

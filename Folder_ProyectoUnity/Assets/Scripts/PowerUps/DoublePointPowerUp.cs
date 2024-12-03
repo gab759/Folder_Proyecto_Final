@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoublePointPowerUp : PowerUpBase
 {
-    public override string PowerUpTag => "DoublePoint";
+    //public override string PowerUpTag => "DoublePoint";
 
     public override void Activate()
     {
