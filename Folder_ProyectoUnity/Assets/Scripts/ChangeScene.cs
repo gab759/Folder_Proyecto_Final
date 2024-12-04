@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    public GameObject panel;
+    public GameObject panelSettings;
+    public GameObject panelShop;
+
     public void LoadGameScene()
     {
         SceneManager.LoadScene("Game");
@@ -18,12 +20,20 @@ public class ChangeScene : MonoBehaviour
     }
     public void ActivatePanel()
     {
-        panel.SetActive(true);
+        panelSettings.SetActive(true);
     }
     public void DeactivatePanel()
     {
-        panel.SetActive(false);
+        panelSettings.SetActive(false);
         Time.timeScale = 1;
+    }
+    public void ActivatePanelShop()
+    {
+        panelShop.SetActive(true);
+    }
+    public void DesactivatePanelShop()
+    {
+        panelShop.SetActive(false);
     }
     public void ExitApplication()
     {
@@ -31,7 +41,7 @@ public class ChangeScene : MonoBehaviour
     }
     public void PauseGame()
     {
-        panel.SetActive(true);
+        panelSettings.SetActive(true);
         Time.timeScale = 0;
     }
 }

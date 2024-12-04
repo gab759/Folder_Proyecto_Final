@@ -3181,7 +3181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9566cdb3dd6d0324eb420d71e529bbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLife: 0
   playerCoins: 0
   magnetPivot: {fileID: 0}
 --- !u!4 &1685041299
@@ -3421,7 +3420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a103cd30c7cec94d9372e79c60fe434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 877445378}
+  panelSettings: {fileID: 877445378}
+  panelShop: {fileID: 0}
 --- !u!4 &1806252797
 Transform:
   m_ObjectHideFlags: 0
