@@ -6,7 +6,7 @@ public class GeneratorCoin : MonoBehaviour
 {
     public CoinPattern[] coinPattern;
     public Transform[] spawnPoints;
-    public float spawnInterval = 10f;
+    public float spawnInterval = 7f;
 
     private float lastSpawnZ;
 

@@ -6,6 +6,10 @@ public abstract class PowerUpBase : MonoBehaviour
 {
     public float speed = 5f;
     public PowerUpData powerUpData;
+    private void Start()
+    {
+        transform.rotation = Quaternion.Euler(-90, 0, 0);
+    }
     public virtual void ActivatePowerUp(GameManager gameManager)
     {
         Activate();

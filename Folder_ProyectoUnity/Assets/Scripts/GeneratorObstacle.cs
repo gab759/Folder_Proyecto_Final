@@ -6,24 +6,38 @@ public class GeneratorObstacle : MonoBehaviour
 {
     public GameObject[] obstaclePrefabs;
     public Transform[] spawnPoints;
-    public float spawnInterval = 2f;
+    public float minSpawnInterval = 1f;
+    public float maxSpawnInterval = 3f;
 
-    private float lastSpawnZ;
+    private float[] nextSpawnTimes;
 
     private void Start()
     {
-        lastSpawnZ = spawnPoints[0].position.z;
-        SpawnObstacle();
-        InvokeRepeating("SpawnObstacle", spawnInterval, spawnInterval);
+        nextSpawnTimes = new float[spawnPoints.Length];
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            nextSpawnTimes[i] = Time.time + Random.Range(minSpawnInterval, maxSpawnInterval);
+        }
     }
 
-    private void SpawnObstacle()
+    private void Update()
+    {
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            if (Time.time >= nextSpawnTimes[i])
+            {
+                SpawnObstacleAtPoint(i);
+                nextSpawnTimes[i] = Time.time + Random.Range(minSpawnInterval, maxSpawnInterval);
+            }
+        }
+    }
+
+    private void SpawnObstacleAtPoint(int spawnPointIndex)
     {
         GameObject selectedPrefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
-        Transform selectedSpawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        Vector3 spawnPosition = new Vector3(selectedSpawnPoint.position.x, selectedSpawnPoint.position.y, lastSpawnZ);
-
+        Transform spawnPoint = spawnPoints[spawnPointIndex];
+        Vector3 spawnPosition = new Vector3(spawnPoint.position.x, spawnPoint.position.y, spawnPoint.position.z);
         Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
     }
 }

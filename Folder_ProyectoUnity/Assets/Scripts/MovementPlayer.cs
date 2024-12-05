@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 
 public class MovementPlayer : MonoBehaviour
 {
-    public float laneDistance = 2.1f;
+    [Header("Lane References")]
+    public Transform[] laneTransforms;
+
     public float moveSpeed = 5.0f;
 
     private int currentLane = 1;
@@ -13,6 +15,12 @@ public class MovementPlayer : MonoBehaviour
 
     void Start()
     {
+        if (laneTransforms.Length != 3)
+        {
+            Debug.LogError("El arreglo laneTransforms debe contener exactamente 3 elementos.");
+            return;
+        }
+
         UpdateTargetPosition();
     }
 
@@ -38,7 +46,7 @@ public class MovementPlayer : MonoBehaviour
 
     public void OnMoveRight(InputAction.CallbackContext context)
     {
-        if (context.performed && currentLane < 2)
+        if (context.performed && currentLane < laneTransforms.Length - 1)
         {
             currentLane++;
             UpdateTargetPosition();
@@ -47,6 +55,6 @@ public class MovementPlayer : MonoBehaviour
 
     private void UpdateTargetPosition()
     {
-        targetX = (currentLane - 1) * laneDistance;
+        targetX = laneTransforms[currentLane].position.x;
     }
 }

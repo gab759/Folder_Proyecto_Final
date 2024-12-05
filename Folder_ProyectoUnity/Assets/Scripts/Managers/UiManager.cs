@@ -13,7 +13,7 @@ public class UiManager : MonoBehaviour
 
     private MyQueue<Sprite> overflowQueue = new MyQueue<Sprite>();
     private float score = 0;
-    private float scoreIncreaseRate = 15f;
+    private float scoreIncreaseRate = 20f;
 
     private void Start()
     {
@@ -104,6 +104,6 @@ public class UiManager : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        scoreText.text = "Puntaje: " + Mathf.FloorToInt(score);
+        scoreText.text = "" + Mathf.FloorToInt(score);
     }
 }
