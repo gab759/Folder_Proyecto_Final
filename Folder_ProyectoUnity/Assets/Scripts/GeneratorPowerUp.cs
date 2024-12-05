@@ -14,7 +14,7 @@ public class GeneratorPowerUp : MonoBehaviour
     {
         lastSpawnZ = spawnPoints[0].position.z;
         SpawnPowerUp();
-        InvokeRepeating("SpawnObstacle", spawnInterval, spawnInterval);
+        InvokeRepeating("SpawnPowerUp", spawnInterval, spawnInterval);
     }
 
     private void SpawnPowerUp()

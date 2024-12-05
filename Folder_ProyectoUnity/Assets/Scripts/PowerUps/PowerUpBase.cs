@@ -27,14 +27,14 @@ public abstract class PowerUpBase : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PowerUpController controller = other.GetComponent <PowerUpController>();
+            PowerUpController controller = other.GetComponent<PowerUpController>();
             if (controller != null)
             {
                 controller.CollectPowerUp(this);
                 Destroy(gameObject);
             }
         }
-        if (other.CompareTag("Delete"))
+        else if (other.CompareTag("Delete"))
         {
             Destroy(gameObject);
         }

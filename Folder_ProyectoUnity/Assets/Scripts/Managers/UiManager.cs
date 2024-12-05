@@ -9,6 +9,8 @@ public class UiManager : MonoBehaviour
     [SerializeField] private TMP_Text coinsText;
     [SerializeField] private Image[] powerUpSlots;
     [SerializeField] private Sprite emptySlotSprite;
+    [SerializeField] private Image doubleCoinIndicator;
+    [SerializeField] private Image doublePointIndicator;
     public GameObject panelGameOver;
 
     private MyQueue<Sprite> overflowQueue = new MyQueue<Sprite>();
@@ -18,18 +20,24 @@ public class UiManager : MonoBehaviour
     private void Start()
     {
         InitializePowerUpSlots();
+        SetIndicatorState(doubleCoinIndicator, false);
+        SetIndicatorState(doublePointIndicator, false);
     }
 
     private void OnEnable()
     {
         GameManager.Instance.OnCoinUpdate += OnCoinUpdate;
         GameManager.Instance.OnLose += HandleLose;
+        GameManager.Instance.OnDoubleCoinActive += UpdateDoubleCoinIndicator;
+        GameManager.Instance.OnDoublePointActive += UpdateDoublePointIndicator;
     }
 
     private void OnDisable()
     {
         GameManager.Instance.OnCoinUpdate -= OnCoinUpdate;
         GameManager.Instance.OnLose -= HandleLose;
+        GameManager.Instance.OnDoubleCoinActive -= UpdateDoubleCoinIndicator;
+        GameManager.Instance.OnDoublePointActive -= UpdateDoublePointIndicator;
     }
 
     private void Update()
@@ -105,5 +113,30 @@ public class UiManager : MonoBehaviour
     private void UpdateScoreText()
     {
         scoreText.text = "" + Mathf.FloorToInt(score);
+    }
+    private void UpdateDoubleCoinIndicator(bool isActive)
+    {
+        SetIndicatorState(doubleCoinIndicator, isActive);
+    }
+
+    private void UpdateDoublePointIndicator(bool isActive)
+    {
+        SetIndicatorState(doublePointIndicator, isActive);
+    }
+    private void SetIndicatorState(Image indicator, bool isActive)
+    {
+        if (indicator != null)
+        {
+            indicator.gameObject.SetActive(isActive);
+
+            if (isActive)
+            {
+                indicator.color = Color.white;
+            }
+            else
+            {
+                indicator.color = new Color(1, 1, 1, 0);
+            }
+        }
     }
 }

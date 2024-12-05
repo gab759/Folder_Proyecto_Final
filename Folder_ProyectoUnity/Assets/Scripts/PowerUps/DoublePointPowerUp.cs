@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class DoublePointPowerUp : PowerUpBase
 {
-    //public override string PowerUpTag => "DoublePoint";
-
-    public override void Activate()
+    public override void ActivatePowerUp(GameManager gameManager)
     {
+        gameManager.ActivateDoublePoint(powerUpData.duration);
         base.Activate();
-        //Debug.LogError("Doble puntos activado");
     }
 }

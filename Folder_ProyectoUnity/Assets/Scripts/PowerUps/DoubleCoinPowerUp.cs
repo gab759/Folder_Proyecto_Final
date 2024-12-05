@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DoubleCoinPowerUp : PowerUpBase
 {
-    //public override string PowerUpTag => "DoubleCoin";
     private void Start()
     {
         Vector3 adjustedPosition = transform.position;
@@ -12,9 +11,9 @@ public class DoubleCoinPowerUp : PowerUpBase
         transform.position = adjustedPosition;
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
-    public override void Activate()
+    public override void ActivatePowerUp(GameManager gameManager)
     {
-        //base.Activate();
-        //Debug.LogError("Doble monedas activado");
+        gameManager.ActivateDoubleCoin(powerUpData.duration);
+        base.Activate();
     }
 }
