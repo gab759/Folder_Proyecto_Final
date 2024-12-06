@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ChangeScene : MonoBehaviour
 {
     public GameObject panelSettings;
+    public GameObject panelControls;
     public GameObject panelShop;
 
     public void LoadGameScene()
@@ -30,6 +31,14 @@ public class ChangeScene : MonoBehaviour
     public void ActivatePanelShop()
     {
         panelShop.SetActive(true);
+    }
+    public void ActivatePanelControl()
+    {
+        panelControls.SetActive(true);
+    }
+    public void DesactivatePanelControl()
+    {
+        panelControls.SetActive(false);
     }
     public void DesactivatePanelShop()
     {

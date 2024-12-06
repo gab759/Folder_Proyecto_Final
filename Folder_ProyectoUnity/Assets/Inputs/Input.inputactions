@@ -98,6 +98,17 @@
                 },
                 {
                     "name": "",
+                    "id": "82490dc9-9787-4401-9211-13468af3d38b",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Slide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "733ee393-6312-4581-b5f3-b7eb72821dcb",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -120,6 +131,17 @@
                 },
                 {
                     "name": "",
+                    "id": "ac0454fc-c6ce-45b0-935f-df37773ce616",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "OnMoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "da86e6df-74ad-4cd0-a041-3840e844aa30",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -136,6 +158,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
+                    "action": "OnMoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ef0d42f-3548-4741-a90b-a957091e7a6c",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
                     "action": "OnMoveRight",
                     "isComposite": false,
                     "isPartOfComposite": false
