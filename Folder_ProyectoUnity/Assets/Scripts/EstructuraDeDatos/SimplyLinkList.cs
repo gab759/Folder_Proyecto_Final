@@ -155,6 +155,24 @@ public class SimplyLinkList <T>
         }
         return tmp.Value;
     }
+    public void InsertNodeAtEnd(T value)
+    {
+        Node newNode = new Node(value);
+        if (Head == null)
+        {
+            Head = newNode;
+        }
+        else
+        {
+            Node tmp = Head;
+            while (tmp.Next != null)
+            {
+                tmp = tmp.Next;
+            }
+            tmp.Next = newNode;
+        }
+        Count++;
+    }
 
     public T GetNodeAtPosition(int position)
     {

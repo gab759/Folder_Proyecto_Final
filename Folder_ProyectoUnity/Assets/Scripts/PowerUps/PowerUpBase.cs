@@ -15,7 +15,7 @@ public abstract class PowerUpBase : MonoBehaviour
         Activate();
     }
     public virtual void Activate()
-    {
+    {   
         Debug.Log("Activando" + powerUpData);
     }
     private void Update()

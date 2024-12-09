@@ -33,7 +33,6 @@ public class PowerUpController : MonoBehaviour
             //Debug.Log("Usando Power-Up: " + activePowerUp.PowerUpTag);
             GameManager.Instance.PlaySFX(usePowerUp);
 
-            Debug.Log("SONIDOOOOOOOO?????");
             activePowerUp.ActivatePowerUp(GameManager.Instance);
 
             uiManager.RemovePowerUpFromUI(activePowerUp.powerUpData.icon);

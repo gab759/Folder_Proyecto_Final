@@ -16,12 +16,16 @@ public class UiManager : MonoBehaviour
     private MyQueue<Sprite> overflowQueue = new MyQueue<Sprite>();
     private float score = 0;
     private float scoreIncreaseRate = 20f;
-
+    private bool isDoublePointActive = false;
+    [SerializeField] private TMP_Text[] scoreTexts;
+    private SimplyLinkList<float> scoreList = new SimplyLinkList<float>();
     private void Start()
     {
         InitializePowerUpSlots();
         SetIndicatorState(doubleCoinIndicator, false);
         SetIndicatorState(doublePointIndicator, false);
+        InitializeScoreTexts();
+        UpdateScoreBoardUI();
     }
 
     private void OnEnable()
@@ -30,6 +34,7 @@ public class UiManager : MonoBehaviour
         GameManager.Instance.OnLose += HandleLose;
         GameManager.Instance.OnDoubleCoinActive += UpdateDoubleCoinIndicator;
         GameManager.Instance.OnDoublePointActive += UpdateDoublePointIndicator;
+
     }
 
     private void OnDisable()
@@ -38,14 +43,70 @@ public class UiManager : MonoBehaviour
         GameManager.Instance.OnLose -= HandleLose;
         GameManager.Instance.OnDoubleCoinActive -= UpdateDoubleCoinIndicator;
         GameManager.Instance.OnDoublePointActive -= UpdateDoublePointIndicator;
-    }
 
+    }
     private void Update()
     {
-        score += scoreIncreaseRate * Time.deltaTime;
+        float pointsToAdd = scoreIncreaseRate * Time.deltaTime;
+        if (isDoublePointActive)
+        {
+            pointsToAdd *= 2;
+        }
+
+        score += pointsToAdd;
         UpdateScoreText();
     }
+    public void AddScore(float newScore)
+    {
+        scoreList.AddNodeAtEnd(newScore);
+        SortScores();
+        UpdateScoreBoardUI();
+    }
+    private void SortScores()
+    {
+        for (int i = 0; i < scoreList.Count - 1; i++)
+        {
+            int maxIndex = i;
 
+            for (int j = i + 1; j < scoreList.Count; j++)
+            {
+                if (scoreList.GetNodeAtPosition(j) > scoreList.GetNodeAtPosition(maxIndex))
+                {
+                    maxIndex = j;
+                }
+            }
+
+            // Intercambia valores
+            if (maxIndex != i)
+            {
+                float temp = scoreList.GetNodeAtPosition(i);
+                scoreList.ModifyAtPosition(scoreList.GetNodeAtPosition(maxIndex), i);
+                scoreList.ModifyAtPosition(temp, maxIndex);
+            }
+        }
+    }
+    public void UpdateScoreBoardUI()
+    {
+        for (int i = 0; i < scoreTexts.Length; i++)
+        {
+            if (i < scoreList.Count)
+            {
+                float score = scoreList.GetNodeAtPosition(i);
+                scoreTexts[i].text = (i + 1) + ". " + score.ToString();
+            }
+            else
+            {
+                scoreTexts[i].text = "---";
+            }
+        }
+    }
+    private void InitializeScoreTexts()
+    {
+        for (int i = 0; i < scoreTexts.Length; i++)
+        {
+            scoreTexts[i].text = "---";
+        }
+    }
     private void InitializePowerUpSlots()
     {
         for (int i = 0; i < powerUpSlots.Length; i++)
@@ -71,8 +132,8 @@ public class UiManager : MonoBehaviour
     private void HandleLose()
     {
         Time.timeScale = 0;
-        panelGameOver.SetActive(true); 
-
+        panelGameOver.SetActive(true);
+        UpdateScoreBoardUI();
         Debug.Log("LOSS");
     }
     public void RemovePowerUpFromUI(Sprite powerUpIcon)
@@ -121,6 +182,7 @@ public class UiManager : MonoBehaviour
 
     private void UpdateDoublePointIndicator(bool isActive)
     {
+        isDoublePointActive = isActive;
         SetIndicatorState(doublePointIndicator, isActive);
     }
     private void SetIndicatorState(Image indicator, bool isActive)

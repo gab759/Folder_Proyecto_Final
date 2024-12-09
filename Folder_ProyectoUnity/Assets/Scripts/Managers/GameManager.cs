@@ -7,12 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("Atributos del Player: ")]
-    //[SerializeField] private int playerLife;
     [SerializeField] private int playerCoins;
-    [SerializeField] private float playerPoints;
     [SerializeField] private Transform magnetPivot;
     private bool isDoubleCoinActive = false;
-    private bool isDoublePointActive = false;
     public Transform MagnetPivot => magnetPivot;
     private Coroutine magnetCoroutine;
     private Coroutine doubleCoinCoroutine;
@@ -47,39 +44,6 @@ public class GameManager : MonoBehaviour
         playerCoins += coinsToAdd;
         OnCoinUpdate?.Invoke(playerCoins);
     }
-    public void AddScore(float points)
-    {
-        float pointsToAdd = points;
-        if (isDoublePointActive)
-        {
-            pointsToAdd = points * 2;
-        }
-        playerPoints += pointsToAdd;
-        UpdateTimeScale(playerPoints);
-
-        Debug.Log("puntos añadidos: " + points);
-    }
-    private void UpdateTimeScale(float points)
-    {
-        if (points >= 500 && points < 1000)
-        {
-            Time.timeScale = 5.0f;
-        }
-        else if (points >= 1000 && points < 1500)
-        {
-            Time.timeScale = 1.4f;
-        }
-        else if (points >= 1500)
-        {
-            Time.timeScale = 1.6f;
-        }
-        else
-        {
-            Time.timeScale = 1.0f;
-        }
-
-        Debug.Log("Time Scale actualizado " + Time.timeScale);
-    }
     public void ActivateMagnet(float duration)
     {
         OnMagnetActivate?.Invoke(true);
@@ -107,7 +71,6 @@ public class GameManager : MonoBehaviour
 
     public void ActivateDoublePoint(float duration)
     {
-        isDoublePointActive = true;
         OnDoublePointActive?.Invoke(true);
 
         if (doublePointCoroutine != null)
@@ -130,8 +93,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         OnMagnetActivate?.Invoke(false);
-        Debug.Log("Iman desactivado");
     }
+
     private IEnumerator DeactivateDoubleCoin(float duration)
     {
         yield return new WaitForSeconds(duration);
@@ -139,11 +102,10 @@ public class GameManager : MonoBehaviour
         OnDoubleCoinActive?.Invoke(false);
         Debug.Log("Doble monedas desactivado");
     }
+
     private IEnumerator DeactivateDoublePoint(float duration)
     {
         yield return new WaitForSeconds(duration);
-        isDoublePointActive = false;
         OnDoublePointActive?.Invoke(false);
-        Debug.Log("Doble puntos desactivado");
     }
 }
